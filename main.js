@@ -78,29 +78,36 @@ function setup() {
     term.loadAddon(new AttachAddon(socket));
 
     let firstmsg = true;
-    socket.onopen = ()=>{
+    socket.addEventListener('open', ()=>{
         term.clear();
-    };
-    socket.onclose = ()=>{
+    });
+    socket.addEventListener('close', ()=>{
         term.writeln('');
         term.writeln('\n--- 连接中断 ---');
-    };
-    socket.onmessage = ()=>{
+    });
+    socket.addEventListener('message', ()=>{
         if(firstmsg) {
             firstmsg = false;
             socket.send(token + '\n');
         }
-    };
+    });
 
     term.writeln('');
     term.writeln('\n--- 正在连接到题目 ---');
 
     // done
 
+    window.term = term;
+    window.socket = socket;
+
     queueMicrotask(console.log.bind(
         console,
-        '%c网页终端不是题目的一部分，解出题目无需分析网页终端的源码。\n你可以使用 netcat 和 pwntools 等任何工具连接到本题目。',
+        '%c网页终端不是题目的一部分，解出题目无需分析网页终端的源码。\n可以绕过网页终端，使用 netcat 或 pwntools 等任何工具连接到本题目。',
         'font-size: 1.5em; background-color: yellow; font-weight: bold; padding: .5em',
+    ));
+    queueMicrotask(console.log.bind(
+        console,
+        '\n如果你仍然想用网页终端解题，可以借助全局变量 socket。\n例如通过 socket.send("...\\n"); 和 socket.onmessage = console.log; 来与题目交互。\n\n',
     ));
     term.focus();
 }
