@@ -14,7 +14,8 @@ export default defineConfig(() => {
                     compact: true,
                     generatedCode: 'es2015',
                 }
-            }
+            },
+            minify: 'terser',
         },
         esbuild: {
             legalComments: 'none',

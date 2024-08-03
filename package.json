@@ -13,6 +13,7 @@
         "@xterm/addon-canvas": "^0.7.0",
         "@xterm/addon-fit": "^0.10.0",
         "@xterm/xterm": "^5.5.0",
+        "terser": "^5.31.3",
         "vite": "^5.3.1",
         "vite-plugin-compression2": "^1.1.3"
     }
