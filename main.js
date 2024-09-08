@@ -103,7 +103,7 @@ function setup() {
     queueMicrotask(console.log.bind(
         console,
         '%c网页终端不是题目的一部分，解出题目无需分析网页终端的源码。\n可以绕过网页终端，使用 netcat 或 pwntools 等任何工具连接到本题目。',
-        'font-size: 1.5em; background-color: yellow; font-weight: bold; padding: .5em',
+        'font-size: 1.5em; background-color: yellow; color: black; font-weight: bold; padding: .5em',
     ));
     queueMicrotask(console.log.bind(
         console,
