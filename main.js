@@ -2,6 +2,7 @@ import {Terminal} from '@xterm/xterm';
 import {FitAddon} from '@xterm/addon-fit';
 import {AttachAddon} from '@xterm/addon-attach';
 import {CanvasAddon} from '@xterm/addon-canvas';
+import {Unicode11Addon} from '@xterm/addon-unicode11';
 
 import '@xterm/xterm/css/xterm.css';
 import './style.css';
@@ -10,11 +11,15 @@ function setup() {
     // setup terminal
 
     let term = new Terminal();
+    term.options.allowProposedApi = true;
 
     term.loadAddon(new CanvasAddon());
 
     let fitAddon = new FitAddon();
     term.loadAddon(fitAddon);
+
+    term.loadAddon(new Unicode11Addon());
+    term.unicode.activeVersion = '11';
 
     term.open(document.getElementById('terminal'));
     fitAddon.fit();

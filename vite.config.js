@@ -1,5 +1,5 @@
 import {defineConfig} from 'vite';
-import {compression} from 'vite-plugin-compression2';
+import {compression, defineAlgorithm} from 'vite-plugin-compression2'
 import zlib from 'zlib';
 
 export default defineConfig(() => {
@@ -23,13 +23,15 @@ export default defineConfig(() => {
         plugins: [
             compression({
                 include: /\.*$/,
-                algorithm: 'brotliCompress',
-                compressionOptions: {
-                    params: {
-                        [zlib.constants.BROTLI_PARAM_MODE]: zlib.constants.BROTLI_MODE_TEXT,
-                        [zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MAX_QUALITY,
-                    },
-                },
+                exclude: /\.(png|jpg|jpeg|webp|mp3|ogg|webm)$/i,
+                algorithms: [
+                    defineAlgorithm('brotliCompress', {
+                        params: {
+                            [zlib.constants.BROTLI_PARAM_MODE]: zlib.constants.BROTLI_MODE_TEXT,
+                            [zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MAX_QUALITY,
+                        },
+                    }),
+                ],
             }),
         ],
     };
