@@ -46,9 +46,7 @@ function setup() {
         token = localStorage.getItem('token') || '';
     }
 
-    let uid = parseInt(token.split(':')[0]);
-
-    if(!uid) {
+    if(!token) {
         term.writeln('');
         term.writeln('\n--- Token 无效，请从比赛平台重新进入 ---');
         return;
@@ -60,7 +58,7 @@ function setup() {
         let canary = document.cookie.includes('anticheat_canary=') ?
             document.cookie.split('anticheat_canary=')[1].split(';')[0].substring(0, 100) :
             document.cookie.substring(0, 150);
-        return `ggac-${uid}-${canary}`;
+        return `ggac-${canary}`;
     })();
 
     function make_html(s) {
